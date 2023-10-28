@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "docs": "jsdoc -c jsdoc.conf.json"
+    "docs": "jsdoc -c jsdoc.conf.json",
+    "sass": "sass --watch ./src/assets/scss/main.scss:./src/assets/style.css"
   },
   "dependencies": {
     "react": "^18.2.0",

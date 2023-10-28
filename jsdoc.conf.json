@@ -1,0 +1,18 @@
+{
+    "source": {
+		"include": ["./src", "./README.md"]
+	},
+    "opts": {
+        "destination": "./docs",
+        "recurse": true,
+		"verbose": true,
+        "encoding": "utf8"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    }
+}

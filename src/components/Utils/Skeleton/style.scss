@@ -1,0 +1,19 @@
+.box {
+    background: linear-gradient(90deg, #e8e8e8 0px, #f8f8f8 40px, #e8e8e8 80px);
+    background-size: 350px;
+    width: 1000px;
+    height: 400px;
+    border-radius: 3px;
+    animation: animation 2.5s infinite;
+    margin: 150px auto;
+}
+
+@keyframes animation {
+    0% {
+        background-position: -100px;
+    }
+    40%,
+    100% {
+        background-position: 270px;
+    }
+}

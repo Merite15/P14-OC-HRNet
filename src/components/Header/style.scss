@@ -1,0 +1,56 @@
+@import "@/assets/scss/utils/variables";
+
+header {
+  height: 100px;
+  padding: 0 5%;
+  border-bottom: 1px solid  lightgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    img {
+      height: 70px;
+      width: 70px;
+    }
+  }
+
+  .nav{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    p{
+      font-size: 1.2rem;
+    }
+  }
+
+  ul {
+    display: flex;
+    gap: 15px;
+    font-size: 1.2rem;
+  }
+
+  a {
+    position: relative;
+  }
+
+  li:hover {
+    font-weight: bold;
+  }
+
+  li .nav-active:after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 0;
+    background: $green-light;
+    height: 2px;
+    width: 100%;
+  }
+
+}

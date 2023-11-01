@@ -9,6 +9,10 @@ export const users = createSlice({
             return (state = action.payload);
         },
 
+        addUser: (state, action) => {
+            return (state = [...state, action.payload]);
+        },
+
         deleteUser: (state, action) => {
             const array = state.filter(
                 (employee) => employee.id !== action.payload
@@ -18,6 +22,6 @@ export const users = createSlice({
     },
 });
 
-export const { getUsers, deleteUser } = users.actions;
+export const { getUsers, deleteUser, addUser } = users.actions;
 
 export default users.reducer;

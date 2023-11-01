@@ -8,9 +8,17 @@ export const users = createSlice({
         getUsers: (state, action) => {
             return (state = action.payload);
         },
+
+        deleteUser: (state, action) => {
+            const array = state.filter(
+                (employee) => employee.id !== action.payload
+            );
+            return array;
+        },
+
     },
 });
 
-export const { getUsers } = users.actions;
+export const { getUsers, deleteUser } = users.actions;
 
 export default users.reducer;

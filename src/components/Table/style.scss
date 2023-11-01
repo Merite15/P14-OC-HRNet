@@ -1,0 +1,144 @@
+@import "@/assets/scss/utils/variables";
+
+.list-page-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-container {
+  .list-header,
+  .footer-list-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+  }
+  .filter-entries-container {
+    select {
+      font-size: 1rem;
+      font-weight: 500;
+      background: $cream-dark;
+      padding: 5px;
+      margin: 0 5px;
+      border-radius: 5px;
+    }
+  }
+
+  .search-container {
+    input {
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 10px;
+      border: solid 1px lightgray;
+      border-radius: 5px;
+      &:focus-visible {
+        outline: solid 1px lightgray;
+        border: solid 1px lightgray;
+      }
+    }
+  }
+
+  .footer-list-pagination-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  @media screen and (max-width: 575px) {
+    .footer-list-container,
+    .list-header {
+      flex-direction: column-reverse;
+      gap: 20px;
+    }
+  }
+}
+//end list-container
+.table-container {
+  width: 100%;
+  border: solid 1px lightgray;
+  margin: 40px auto;
+  overflow-x: auto;
+  border-radius: 5px;
+}
+
+table {
+  width: 99%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  white-space: nowrap;
+}
+
+tr:nth-child(even) {
+  background-color: $cream-light;
+}
+
+thead {
+  height: 50px;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    content: "";
+    width: 100%;
+    border: solid 1px $green-darker;
+  }
+}
+
+td {
+  font-family: Arial, Helvetica, sans-serif;
+  &:last-child {
+    text-align: center;
+  }
+}
+
+th {
+  cursor: pointer;
+}
+
+.no-match {
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+}
+
+.sort-icon {
+  font-size: 1.2rem;
+  margin-left: 12px;
+}
+
+.table-custom-content-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-wrapper {
+  gap: 10px;
+  padding-top: 0;
+}
+
+.custom-cell-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.delete-icon {
+  color: red;
+  cursor: pointer;
+}
+
+.edit-icon {
+  color: blue;
+  cursor: pointer;
+}

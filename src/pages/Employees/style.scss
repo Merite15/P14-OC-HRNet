@@ -1,0 +1,20 @@
+.add-btn {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    color: #ffffff;
+    background: #a3b18a;
+    transition: 0.2s ease-in-out;
+    padding: 5px 10px;
+
+    i {
+        margin-right: 2px;
+    }
+
+    @media screen and (max-width: 575px) {
+        .add-text {
+            display: none;
+        }
+    }
+}

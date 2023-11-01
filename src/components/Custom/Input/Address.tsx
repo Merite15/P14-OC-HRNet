@@ -10,6 +10,7 @@ import { InputProps } from "@/utils/types/InputProps";
  * @param {string} props.errors - The error message associated with the input field, if any.
  * @returns {JSX.Element} InputAddress component for entering address/street information.
  */
+
 export const InputAddress: React.FC<InputProps> = ({ register, errors }) => {
   return (
     <Input

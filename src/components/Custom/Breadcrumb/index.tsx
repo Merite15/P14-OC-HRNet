@@ -1,13 +1,6 @@
 import { Link } from "react-router-dom";
 import './style.scss'
-
-interface BreadCrumbProps {
-    items: {
-        label: string;
-        link?: string;
-    }[];
-    children?: React.ReactNode;
-}
+import { BreadCrumbProps } from "@/utils/types/BreadCrumbProps";
 
 /**
  * Functional component representing a custom breadcrumb navigation.

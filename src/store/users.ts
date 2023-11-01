@@ -15,7 +15,6 @@ export const users = createSlice({
             );
             return array;
         },
-
     },
 });
 

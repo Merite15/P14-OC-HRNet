@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import logo from './logo.png';
+import { pathListEmployee } from "@/utils/routes";
 import "./style.scss";
 
 /**
@@ -20,6 +21,19 @@ export const Header = () => {
         <NavLink to="/">
           Wealth Health
         </NavLink>
+      </div>
+
+      <div className="nav">
+        <ul>
+          <li>
+            <NavLink
+              to={pathListEmployee}
+              className={(nav) => (nav.isActive ? 'nav-active' : '')}
+            >
+              List Of Employees
+            </NavLink>
+          </li>
+        </ul>
       </div>
     </header>
   );

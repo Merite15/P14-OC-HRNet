@@ -70,6 +70,37 @@ a:visited {
   color: black;
 }
 
+button.btn-pagination {
+  cursor: pointer;
+  background: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: black;
+}
+button.btn-pagination:hover {
+  background: lightgray;
+  color: black;
+}
+
+button[disabled],
+button[disabled]:hover {
+  cursor: default;
+  background-color: rgba(247, 244, 236, 0.5);
+  color: rgba(58, 90, 64, 0.5);
+}
+
+.error-message {
+  display: block;
+  color: #ef4444;
+  min-height: 24px;
+  font-size: 0.8rem;
+  line-height: 24px;
+}
+
+.relative {
+  position: relative;
+}
+
 * {
   font-family: "Montserrat", sans-serif;
 }

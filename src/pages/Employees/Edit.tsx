@@ -15,7 +15,7 @@ import { FormEditEmployee } from '@/components/Form/EditEmployee';
  */
 export const EditEmployee = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const [employeeCreated, setEmployeeEdited] = useState('');
+    const [employeeEdited, setEmployeeEdited] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const breadcrumbItems = [
         { label: "Accueil", link: "/" },
@@ -27,7 +27,7 @@ export const EditEmployee = () => {
 
     const employee = useSelector((state: State) =>
         state.employees.find(
-            (employee) => employee.id === parseInt(params.id)
+            (employee) => employee.id === parseInt(params.id ?? '')
         )
     );
 
@@ -50,7 +50,7 @@ export const EditEmployee = () => {
                 close={() => setIsOpen(false)}
                 show={isOpen}
                 title={'Employee edited'}
-                content={`Employee ${employeeCreated} was edited!`}
+                content={`Employee ${employeeEdited} was edited!`}
             />
         </main>
     );

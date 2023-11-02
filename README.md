@@ -2,7 +2,7 @@
 
 # HRnet 👥💼
 
-[Site live](https://google.com/) - [Documentation](https://google.com/) 
+[Site live](https://google.com/) - [Documentation](https://merite15.github.io/P14-OC-HRNet/) 
 
 ## Description:
 

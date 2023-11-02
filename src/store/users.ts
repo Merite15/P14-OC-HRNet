@@ -6,7 +6,7 @@ export const users = createSlice({
     initialState: [] as Employee[],
     reducers: {
         getUsers: (state, action) => {
-            return (state = action.payload);
+            return state = action.payload;
         },
 
         addUser: (state, action) => {

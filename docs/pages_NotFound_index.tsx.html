@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/index.tsx</title>
+    <title>JSDoc: Source: pages/NotFound/index.tsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/index.tsx</h1>
+    <h1 class="page-title">Source: pages/NotFound/index.tsx</h1>
 
     
 
@@ -26,41 +26,26 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { NavLink } from 'react-router-dom';
-import logo from './logo.png';
-import { pathListEmployee } from "@/utils/routes";
+            <pre class="prettyprint source linenums"><code>import { NavLink } from "react-router-dom";
 import "./style.scss";
 
 /**
- * A custom React component that renders the header of the application.
+ * A custom React component that renders a 404 page.
  *
- * @returns A React element representing the Header component.
+ * @returns A React element representing the NotFound component.
  */
-export const Header = () => {  
-  return (
-    &lt;header>
-      &lt;div className="logo">
-        &lt;img src={logo} alt="logo" />
-        &lt;NavLink to="/">
-          Wealth Health
-        &lt;/NavLink>
-      &lt;/div>
-
-      &lt;div className="nav">
-        &lt;ul>
-          &lt;li>
-            &lt;NavLink
-              to={pathListEmployee}
-              className={(nav) => (nav.isActive ? 'nav-active' : '')}
-            >
-              List Of Employees
-            &lt;/NavLink>
-          &lt;/li>
-        &lt;/ul>
-      &lt;/div>
-    &lt;/header>
-  );
-};</code></pre>
+export const NotFound = (): JSX.Element => {
+    return (
+        &lt;div className="notFound">
+            &lt;div>
+                &lt;div className="notFound__code">404&lt;/div>
+                &lt;div className="notFound__text">Oups! La page que vous demandez n&amp;apos;existe pas.&lt;/div>
+                &lt;div className="home-link">&lt;NavLink className="home-nav-link" to="/">Retourner sur la page
+                    d’accueil&lt;/NavLink>&lt;/div>
+            &lt;/div>
+        &lt;/div>
+    );
+}</code></pre>
         </article>
     </section>
 

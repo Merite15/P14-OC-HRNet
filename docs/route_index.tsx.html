@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/index.tsx</title>
+    <title>JSDoc: Source: route/index.tsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/index.tsx</h1>
+    <h1 class="page-title">Source: route/index.tsx</h1>
 
     
 
@@ -26,41 +26,42 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { NavLink } from 'react-router-dom';
-import logo from './logo.png';
-import { pathListEmployee } from "@/utils/routes";
-import "./style.scss";
+            <pre class="prettyprint source linenums"><code>import { Routes, Route } from "react-router-dom";
+import { Main } from "@/layouts/main";
+import { Home } from "@/pages/Home";
+import { NotFound } from "@/pages/NotFound";
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import mockData from '@/data/data.json';
+import { getUsers } from '@/store/users';
+import { EmployeeList } from "@/pages/Employees";
+import { NewEmployee } from "@/pages/Employees/New";
+import { EditEmployee } from "@/pages/Employees/Edit";
+import { pathListEmployee, pathNewEmployee, pathEditEmployee } from "@/utils/routes";
 
 /**
- * A custom React component that renders the header of the application.
- *
- * @returns A React element representing the Header component.
+ * The AppRoutes function is a React component that defines the routes for a web application using
+ * React Router.
+ * @returns The AppRoutes component is returning a JSX element.
  */
-export const Header = () => {  
-  return (
-    &lt;header>
-      &lt;div className="logo">
-        &lt;img src={logo} alt="logo" />
-        &lt;NavLink to="/">
-          Wealth Health
-        &lt;/NavLink>
-      &lt;/div>
+export const AppRoutes = (): JSX.Element => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getUsers(mockData));
+    }, [dispatch]);
 
-      &lt;div className="nav">
-        &lt;ul>
-          &lt;li>
-            &lt;NavLink
-              to={pathListEmployee}
-              className={(nav) => (nav.isActive ? 'nav-active' : '')}
-            >
-              List Of Employees
-            &lt;/NavLink>
-          &lt;/li>
-        &lt;/ul>
-      &lt;/div>
-    &lt;/header>
-  );
-};</code></pre>
+    return (
+        &lt;Routes>
+            &lt;Route path="/" element={&lt;Main />}>
+                &lt;Route index element={&lt;Home />} />
+                &lt;Route path={`${pathListEmployee}`} element={&lt;EmployeeList />} />
+                &lt;Route path={`${pathNewEmployee}`} element={&lt;NewEmployee />} />
+                &lt;Route path={`${pathEditEmployee}`} element={&lt;EditEmployee />} />
+                &lt;Route path="*" element={&lt;NotFound />} />
+            &lt;/Route>
+        &lt;/Routes>
+    );
+}</code></pre>
         </article>
     </section>
 

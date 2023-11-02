@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "react": "^18.2.0",
+    "better-docs": "^2.7.2",
     "react-dom": "^18.2.0",
     "@hookform/resolvers": "^3.1.1",
     "@reduxjs/toolkit": "^1.9.5",

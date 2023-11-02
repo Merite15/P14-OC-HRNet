@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/index.tsx</title>
+    <title>JSDoc: Source: components/Custom/Input/City.tsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/index.tsx</h1>
+    <h1 class="page-title">Source: components/Custom/Input/City.tsx</h1>
 
     
 
@@ -26,41 +26,36 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { NavLink } from 'react-router-dom';
-import logo from './logo.png';
-import { pathListEmployee } from "@/utils/routes";
-import "./style.scss";
+            <pre class="prettyprint source linenums"><code>import { Input } from './index';
+import { InputProps } from "@/utils/types/InputProps";
 
 /**
- * A custom React component that renders the header of the application.
+ * A custom input city component that renders a text input field for the user to enter their city.
  *
- * @returns A React element representing the Header component.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ *
+ * @returns A React element representing the input city component.
  */
-export const Header = () => {  
-  return (
-    &lt;header>
-      &lt;div className="logo">
-        &lt;img src={logo} alt="logo" />
-        &lt;NavLink to="/">
-          Wealth Health
-        &lt;/NavLink>
-      &lt;/div>
 
-      &lt;div className="nav">
-        &lt;ul>
-          &lt;li>
-            &lt;NavLink
-              to={pathListEmployee}
-              className={(nav) => (nav.isActive ? 'nav-active' : '')}
-            >
-              List Of Employees
-            &lt;/NavLink>
-          &lt;/li>
-        &lt;/ul>
-      &lt;/div>
-    &lt;/header>
+export const InputCity: React.FC&lt;InputProps> = ({ register, errors }) => {
+  return (
+    &lt;Input
+      name={'city'}
+      type={'text'}
+      id={'city'}
+      label={'city'}
+      labelText={'City'}
+      isModal={false}
+      isAutoComplete={false}
+      placeholder={'ex: New York'}
+      register={register}
+      errors={errors}
+    />
   );
-};</code></pre>
+};
+
+</code></pre>
         </article>
     </section>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/index.tsx</title>
+    <title>JSDoc: Source: components/Custom/Select/Department.tsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/index.tsx</h1>
+    <h1 class="page-title">Source: components/Custom/Select/Department.tsx</h1>
 
     
 
@@ -26,39 +26,64 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { NavLink } from 'react-router-dom';
-import logo from './logo.png';
-import { pathListEmployee } from "@/utils/routes";
-import "./style.scss";
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+
+interface SelectDepartmentProps {
+  register: UseFormRegister&lt;{
+    first_name: string,
+    last_name: string;
+    dateOfBirth: Date;
+    startDate: Date;
+    department: string;
+    address: string;
+    city: string;
+    state: string;
+    zipCode: number;
+  }>;
+  errors: React.ReactNode;
+  setValue: UseFormSetValue&lt;{
+    first_name: string,
+    last_name: string;
+    dateOfBirth: Date;
+    startDate: Date;
+    department: string;
+    address: string;
+    city: string;
+    state: string;
+    zipCode: number;
+  }>;
+}
 
 /**
- * A custom React component that renders the header of the application.
+ * A custom select department component that renders a select input field with options for the different departments in the company.
  *
- * @returns A React element representing the Header component.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ * @param setValue A React Hook Form setValue function.
+ *
+ * @returns A React element representing the select department component.
  */
-export const Header = () => {  
+export const SelectDepartment: React.FC&lt;SelectDepartmentProps> = ({ register, errors, setValue }) => {
   return (
-    &lt;header>
-      &lt;div className="logo">
-        &lt;img src={logo} alt="logo" />
-        &lt;NavLink to="/">
-          Wealth Health
-        &lt;/NavLink>
-      &lt;/div>
-
-      &lt;div className="nav">
-        &lt;ul>
-          &lt;li>
-            &lt;NavLink
-              to={pathListEmployee}
-              className={(nav) => (nav.isActive ? 'nav-active' : '')}
-            >
-              List Of Employees
-            &lt;/NavLink>
-          &lt;/li>
-        &lt;/ul>
-      &lt;/div>
-    &lt;/header>
+    &lt;div className="input-container">
+      &lt;label htmlFor="department">Department&lt;/label>
+      &lt;select
+        {...register('department')}
+        id="department"
+        className="form-input"
+        onChange={(e) => {
+          setValue('department', e.target.value);
+        }}
+      >
+        &lt;option value="Sales" label="Sales">&lt;/option>
+        &lt;option value="Marketing" label="Marketing">&lt;/option>
+        &lt;option value="Engineering" label="Engineering">&lt;/option>
+        &lt;option value="Human Ressources" label="Human Ressources">&lt;/option>
+        &lt;option value="Legal" label="Legal">&lt;/option>
+      &lt;/select>
+      &lt;span className="error-message">{errors}&lt;/span>
+    &lt;/div>
   );
 };</code></pre>
         </article>

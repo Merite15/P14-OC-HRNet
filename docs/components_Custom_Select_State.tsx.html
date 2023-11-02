@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/index.tsx</title>
+    <title>JSDoc: Source: components/Custom/Select/State.tsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/index.tsx</h1>
+    <h1 class="page-title">Source: components/Custom/Select/State.tsx</h1>
 
     
 
@@ -26,41 +26,86 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { NavLink } from 'react-router-dom';
-import logo from './logo.png';
-import { pathListEmployee } from "@/utils/routes";
-import "./style.scss";
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+
+interface SelectStateProps {
+  register: UseFormRegister&lt;{
+    first_name: string,
+    last_name: string;
+    dateOfBirth: Date;
+    startDate: Date;
+    department: string;
+    address: string;
+    city: string;
+    state: string;
+    zipCode: number;
+  }>;
+  errors: React.ReactNode;
+  setValue: UseFormSetValue&lt;{
+    first_name: string,
+    last_name: string;
+    dateOfBirth: Date;
+    startDate: Date;
+    department: string;
+    address: string;
+    city: string;
+    state: string;
+    zipCode: number;
+  }>;
+  setFormSelectedState: (value: React.SetStateAction&lt;undefined> | any) => void
+  formSelectedState: string;
+  states: Array&lt;{ value: string; label: string }>;
+}
 
 /**
- * A custom React component that renders the header of the application.
+ * A custom select state component that renders a select input field with options for the different states in the United States.
  *
- * @returns A React element representing the Header component.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ * @param setValue A React Hook Form setValue function.
+ * @param setFormSelectedState A function to set the selected state.
+ * @param formSelectedState The selected state.
+ * @param states An array of state objects.
+ *
+ * @returns A React element representing the select state component.
  */
-export const Header = () => {  
+export const SelectState: React.FC&lt;SelectStateProps> = ({
+  register,
+  errors,
+  setValue,
+  setFormSelectedState,
+  formSelectedState,
+  states,
+}) => {
   return (
-    &lt;header>
-      &lt;div className="logo">
-        &lt;img src={logo} alt="logo" />
-        &lt;NavLink to="/">
-          Wealth Health
-        &lt;/NavLink>
-      &lt;/div>
-
-      &lt;div className="nav">
-        &lt;ul>
-          &lt;li>
-            &lt;NavLink
-              to={pathListEmployee}
-              className={(nav) => (nav.isActive ? 'nav-active' : '')}
-            >
-              List Of Employees
-            &lt;/NavLink>
-          &lt;/li>
-        &lt;/ul>
-      &lt;/div>
-    &lt;/header>
+    &lt;div className="input-container">
+      &lt;label htmlFor="state">State&lt;/label>
+      &lt;select
+        {...register('state')}
+        id="state"
+        className="form-input"
+        defaultValue={formSelectedState}
+        onChange={(e) => {
+          setFormSelectedState(e.target.value);
+          setValue('state', e.target.value);
+        }}
+      >
+        {states.map((state, index) => {
+          return (
+            &lt;option
+              key={index}
+              value={state.value}
+              label={state.label}
+            >&lt;/option>
+          );
+        })}
+      &lt;/select>
+      &lt;span className="error-message">{errors}&lt;/span>
+    &lt;/div>
   );
-};</code></pre>
+};
+</code></pre>
         </article>
     </section>
 

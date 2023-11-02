@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/index.tsx</title>
+    <title>JSDoc: Source: components/Custom/Breadcrumb/index.tsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/index.tsx</h1>
+    <h1 class="page-title">Source: components/Custom/Breadcrumb/index.tsx</h1>
 
     
 
@@ -26,40 +26,46 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { NavLink } from 'react-router-dom';
-import logo from './logo.png';
-import { pathListEmployee } from "@/utils/routes";
-import "./style.scss";
+            <pre class="prettyprint source linenums"><code>import { Link } from "react-router-dom";
+import './style.scss'
+import { BreadCrumbProps } from "@/utils/types/BreadCrumbProps";
+
 
 /**
- * A custom React component that renders the header of the application.
+ * A custom breadcrumb component that renders a list of links, with separators between them, that indicate the current page's location within a navigational hierarchy.
  *
- * @returns A React element representing the Header component.
+ * @param items An array of breadcrumb items, each of which is an object with the following properties:
+ *   * `label`: The text to display for the breadcrumb item.
+ *   * `link`: (Optional) The URL to link to for the breadcrumb item.
+ * @param children (Optional) Any child components to render below the breadcrumb trail.
+ *
+ * @returns A React element representing the breadcrumb component.
  */
-export const Header = () => {  
-  return (
-    &lt;header>
-      &lt;div className="logo">
-        &lt;img src={logo} alt="logo" />
-        &lt;NavLink to="/">
-          Wealth Health
-        &lt;/NavLink>
-      &lt;/div>
 
-      &lt;div className="nav">
-        &lt;ul>
-          &lt;li>
-            &lt;NavLink
-              to={pathListEmployee}
-              className={(nav) => (nav.isActive ? 'nav-active' : '')}
-            >
-              List Of Employees
-            &lt;/NavLink>
-          &lt;/li>
-        &lt;/ul>
-      &lt;/div>
-    &lt;/header>
-  );
+export const CustomBreadcrumb: React.FC&lt;BreadCrumbProps> = ({ items, children }) => {
+    return (
+        &lt;div className="breadcrumb">
+            &lt;div className="breadcrumb-items">
+                {items.map((item, index) => {
+                    const isLast = index === items.length - 1;
+                    return (
+                        &lt;span key={item.label} >
+                            {item.link ? (
+                                &lt;Link to={item.link} className="breadcrumb-link">
+                                    {item.label}
+                                &lt;/Link>
+                            ) : (
+                                &lt;span className="breadcrumb-label">{item.label}&lt;/span>
+                            )}
+                            {!isLast &amp;&amp; &lt;span className="breadcrumb-separator">/&lt;/span>}
+                        &lt;/span>
+                    );
+                })}
+            &lt;/div>
+
+            {children}
+        &lt;/div>
+    );
 };</code></pre>
         </article>
     </section>

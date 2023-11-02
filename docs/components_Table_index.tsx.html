@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Table/index.tsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Table/index.tsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useGlobalFilter, useTable, usePagination, useSortBy } from 'react-table';
+import { dateParser } from '@/utils/DateFunctions';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsSelected, setIsDeleted} from '@/store/formStatus';
+import { DeleteModal } from '../Modal/Delete';
+import { Link } from 'react-router-dom';
+import "./style.scss";
+
+
+/**
+ * A custom React component that renders a table of employees.
+ *
+ * @returns A React element representing the Table component.
+ */
+export const Table = () => {
+  const [dataImport, setDataImport] = useState([]);
+  const users = useSelector((state : any) => state.employees);
+  const dispatch = useDispatch();
+  const [employeeSelected, setEmployedSelected] = useState&lt;string>('');
+
+  useEffect(() => {
+    setDataImport(users);
+  }, [users]);
+
+  const data = useMemo(() => dataImport, [dataImport]);
+
+  const CustomCell = useCallback(
+    ({ row }: { row: any }) => {
+      const handleCellClick = (e : any) => {
+        const employeeId = e.target.dataset.id;
+
+        dispatch(setIsSelected(true));
+
+        setEmployedSelected(employeeId);
+
+        if (e.target.classList.contains("delete-icon")) {
+          dispatch(setIsDeleted(true))
+        }
+      };
+
+      return (
+        &lt;div className="custom-cell-icons">
+          &lt;Link to={`/employees/edit/${row.original.id}`}>
+            &lt;i className="fa-solid fa-pen-to-square edit-icon" data-id={row.original.id}>&lt;/i>
+          &lt;/Link>
+          &lt;i className="fa-solid fa-trash-can delete-icon" data-id={row.original.id} onClick={handleCellClick}>&lt;/i>
+        &lt;/div>
+      );
+    },
+    []
+  );
+
+  const columns = useMemo(
+    () => [
+      { Header: 'First Name', accessor: 'first_name' },
+      { Header: 'Last Name', accessor: 'last_name' },
+      {
+        Header: 'Date of Birth',
+        accessor: 'dateOfBirth',
+        Cell: ({ value } : { value: string }) => dateParser(value),
+        disableFilters: true,
+        sortType: (a : any, b : any) => {
+          return (
+            new Date(b.values.dateOfBirth).valueOf() - new Date(a.values.dateOfBirth).valueOf()
+          );
+        },
+      },
+      {
+        Header: 'Start Date',
+        accessor: 'startDate',
+        Cell: ({ value } : { value: string }) => dateParser(value),
+        disableFilters: true,
+        sortType: (a : any, b : any) => {
+          return new Date(b.values.startDate).valueOf() - new Date(a.values.startDate).valueOf();
+        },
+      },
+      { Header: 'Street', accessor: 'address' },
+      { Header: 'City', accessor: 'city' },
+      { Header: 'State', accessor: 'state' },
+      { Header: 'Zip Code', accessor: 'zipCode' },
+      { Header: 'Department', accessor: 'department' },
+      {
+        id: 'selection',
+        Header: 'Selection',
+        Cell: CustomCell,
+      },
+    ],
+    [CustomCell]
+  );
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    state,
+    setGlobalFilter,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    setPageSize,
+    prepareRow,
+  } = useTable(
+    { columns, data, enableMultiRowSelection: false },
+    useGlobalFilter,
+    useSortBy,
+    usePagination
+  );
+
+  const { globalFilter, pageIndex, pageSize } = state;
+
+  return (
+    &lt;>
+      &lt;DeleteModal employeeSelected={employeeSelected} />
+
+      &lt;div className="list-container">
+        &lt;div className="list-header">
+          &lt;div className="filter-entries-container">
+            &lt;span>show: &lt;/span>
+            &lt;select
+              value={pageSize}
+              onChange={(e : any) => setPageSize(e.target.value)}
+            >
+              &lt;option value={10}>10&lt;/option>
+              &lt;option value={25}>25&lt;/option>
+              &lt;option value={50}>50&lt;/option>
+              &lt;option value={100}>100&lt;/option>
+            &lt;/select>
+            &lt;span>entries&lt;/span>
+          &lt;/div>
+          &lt;div className="search-container">
+            &lt;label>Search : &lt;/label>
+            &lt;input
+              type="text"
+              value={globalFilter || ''}
+              onChange={(e) => setGlobalFilter(e.target.value)}
+              placeholder="keywords"
+            />
+          &lt;/div>
+        &lt;/div>
+
+        &lt;div className="table-container">
+          &lt;table {...getTableProps()}>
+            &lt;thead>
+              {headerGroups.map((headerGroup, index) => (
+                &lt;tr {...headerGroup.getHeaderGroupProps()} key={index}>
+                  {headerGroup.headers.map((column, index) => (
+                    &lt;th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                      key={index}
+                    >
+                      {column.render('Header')}
+                      &lt;span className="sort-icon">
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? '▼'
+                            : '▲'
+                          : '▼▲'}
+                      &lt;/span>
+                    &lt;/th>
+                  ))}
+                &lt;/tr>
+              ))}
+            &lt;/thead>
+            {page.length > 0 &amp;&amp; (
+              &lt;tbody {...getTableBodyProps()}>
+                {page.map((row : any, index : any) => {
+                  prepareRow(row);
+                  return (
+                    &lt;tr {...row.getRowProps()} key={index}>
+                      {row.cells.map((cell : any, index : any) => (
+                        &lt;td {...cell.getCellProps()} key={index}>
+                          {cell.render('Cell')}
+                        &lt;/td>
+                      ))}
+                    &lt;/tr>
+                  );
+                })}
+              &lt;/tbody>
+            )}
+          &lt;/table>
+          {page.length === 0 &amp;&amp; (
+            &lt;p className="no-match">No matching records found&lt;/p>
+          )}
+        &lt;/div>
+        {page.length > 0 &amp;&amp; (
+          &lt;div className="footer-list-container">
+            &lt;div className="footer-list-entries-container">
+              Page {pageIndex + 1} of {pageOptions.length}
+            &lt;/div>
+            &lt;div className="footer-list-pagination-container">
+              &lt;button
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+                className="btn-pagination"
+              >
+                Previous
+              &lt;/button>
+              {pageOptions.map((p : any, index: any) => {
+                if (
+                  (pageIndex > p - 2 &amp;&amp; pageIndex &lt; p + 2) ||
+                  (p &lt; 3 &amp;&amp; pageIndex &lt; 2) ||
+                  (pageOptions.length - 4 &lt; p &amp;&amp;
+                    pageOptions.length - 1 === pageIndex)
+                ) {
+                  return (
+                    &lt;button
+                      key={index}
+                      className={
+                        pageIndex === p
+                          ? 'btn-pagination active-page'
+                          : 'btn-pagination'
+                      }
+                      onClick={() => gotoPage(p)}
+                    >
+                      {p + 1}
+                    &lt;/button>
+                  );
+                } else return null;
+              })}
+              &lt;button
+                onClick={() => nextPage()}
+                disabled={!canNextPage}
+                className="btn-pagination"
+              >
+                Next
+              &lt;/button>
+            &lt;/div>
+          &lt;/div>
+        )}
+      &lt;/div>
+    &lt;/>
+  );
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AppRoutes">AppRoutes</a></li><li><a href="global.html#CustomBreadcrumb">CustomBreadcrumb</a></li><li><a href="global.html#CustomTooltip">CustomTooltip</a></li><li><a href="global.html#DeleteModal">DeleteModal</a></li><li><a href="global.html#EditEmployee">EditEmployee</a></li><li><a href="global.html#EmployeeList">EmployeeList</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#FormEditEmployee">FormEditEmployee</a></li><li><a href="global.html#FormNewEmployee">FormNewEmployee</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#InputAddress">InputAddress</a></li><li><a href="global.html#InputBirthDay">InputBirthDay</a></li><li><a href="global.html#InputCity">InputCity</a></li><li><a href="global.html#InputDate">InputDate</a></li><li><a href="global.html#InputFirstName">InputFirstName</a></li><li><a href="global.html#InputLastName">InputLastName</a></li><li><a href="global.html#InputZipCode">InputZipCode</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#NewEmployee">NewEmployee</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#SelectDepartment">SelectDepartment</a></li><li><a href="global.html#SelectState">SelectState</a></li><li><a href="global.html#Skeleton">Skeleton</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#convertLocalDateInUTC">convertLocalDateInUTC</a></li><li><a href="global.html#dateParser">dateParser</a></li><li><a href="global.html#minMaxDate">minMaxDate</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Nov 02 2023 17:09:01 GMT+0100 (heure normale d’Afrique de l’Ouest)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

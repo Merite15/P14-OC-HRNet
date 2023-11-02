@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/index.tsx</title>
+    <title>JSDoc: Source: components/Custom/Input/index.tsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/index.tsx</h1>
+    <h1 class="page-title">Source: components/Custom/Input/index.tsx</h1>
 
     
 
@@ -26,41 +26,77 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { NavLink } from 'react-router-dom';
-import logo from './logo.png';
-import { pathListEmployee } from "@/utils/routes";
-import "./style.scss";
+            <pre class="prettyprint source linenums"><code>import { CustomTooltip } from '../../Custom/Tooltip';
+
+interface InputProps {
+  name: string;
+  type: string;
+  id: string;
+  label: string;
+  labelText: string;
+  isModal: boolean;
+  isAutoComplete: boolean;
+  placeholder?: string;
+  register: Function;
+  errors: string | undefined;
+  min?: number;
+  max?: number;
+}
 
 /**
- * A custom React component that renders the header of the application.
+ * A custom input component that renders a text input field with a label and validation errors.
  *
- * @returns A React element representing the Header component.
+ * @param name The name of the input field.
+ * @param type The type of the input field.
+ * @param id The id of the input field.
+ * @param label The label for the input field.
+ * @param labelText The text for the label of the input field.
+ * @param isModal (Optional) Whether or not the input field is modal.
+ * @param isAutoComplete (Optional) Whether or not the input field should be autocompleted.
+ * @param placeholder (Optional) The placeholder text for the input field.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ * @param min (Optional) The minimum value for the input field.
+ * @param max (Optional) The maximum value for the input field.
+ *
+ * @returns A React element representing the input component.
  */
-export const Header = () => {  
-  return (
-    &lt;header>
-      &lt;div className="logo">
-        &lt;img src={logo} alt="logo" />
-        &lt;NavLink to="/">
-          Wealth Health
-        &lt;/NavLink>
-      &lt;/div>
 
-      &lt;div className="nav">
-        &lt;ul>
-          &lt;li>
-            &lt;NavLink
-              to={pathListEmployee}
-              className={(nav) => (nav.isActive ? 'nav-active' : '')}
-            >
-              List Of Employees
-            &lt;/NavLink>
-          &lt;/li>
-        &lt;/ul>
-      &lt;/div>
-    &lt;/header>
+export const Input: React.FC&lt;InputProps> = ({
+  name,
+  type,
+  id,
+  label,
+  labelText,
+  isModal,
+  isAutoComplete,
+  placeholder,
+  register,
+  errors,
+  min,
+  max,
+}) => {
+  return (
+    &lt;div className="input-container relative">
+      &lt;label htmlFor={label}>
+        {labelText}
+        {isModal &amp;&amp; &lt;CustomTooltip />}
+      &lt;/label>
+      &lt;input
+        type={type}
+        id={id}
+        min={min}
+        max={max}
+        className="form-input"
+        autoComplete={isAutoComplete ? 'on' : 'none'}
+        placeholder={placeholder}
+        {...register(name)}
+      />
+      &lt;span className="error-message">{errors}&lt;/span>
+    &lt;/div>
   );
-};</code></pre>
+};
+</code></pre>
         </article>
     </section>
 

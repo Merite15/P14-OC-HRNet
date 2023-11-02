@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/index.tsx</title>
+    <title>JSDoc: Source: pages/Employees/Edit.tsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/index.tsx</h1>
+    <h1 class="page-title">Source: pages/Employees/Edit.tsx</h1>
 
     
 
@@ -26,40 +26,62 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { NavLink } from 'react-router-dom';
-import logo from './logo.png';
-import { pathListEmployee } from "@/utils/routes";
-import "./style.scss";
+            <pre class="prettyprint source linenums"><code>import { useState, useEffect } from 'react';
+
+import { Modal } from 'vite-react-modal';
+import { CustomBreadcrumb } from '@/components/Custom/Breadcrumb';
+import { State } from '@/utils/types/State';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { Loader } from '@/components/Utils/Loader';
+import { FormEditEmployee } from '@/components/Form/EditEmployee';
 
 /**
- * A custom React component that renders the header of the application.
+ * A custom React component that renders the edit employee form.
  *
- * @returns A React element representing the Header component.
+ * @returns A React element representing the EditEmployee component.
  */
-export const Header = () => {  
-  return (
-    &lt;header>
-      &lt;div className="logo">
-        &lt;img src={logo} alt="logo" />
-        &lt;NavLink to="/">
-          Wealth Health
-        &lt;/NavLink>
-      &lt;/div>
+export const EditEmployee = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [employeeEdited, setEmployeeEdited] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    const breadcrumbItems = [
+        { label: "Accueil", link: "/" },
+        { label: "Employees", link: "/employees" },
+        { label: "Edit Employee" }
+    ];
 
-      &lt;div className="nav">
-        &lt;ul>
-          &lt;li>
-            &lt;NavLink
-              to={pathListEmployee}
-              className={(nav) => (nav.isActive ? 'nav-active' : '')}
-            >
-              List Of Employees
-            &lt;/NavLink>
-          &lt;/li>
-        &lt;/ul>
-      &lt;/div>
-    &lt;/header>
-  );
+    const params = useParams()
+
+    const employee = useSelector((state: State) =>
+        state.employees.find(
+            (employee) => employee.id === parseInt(params.id ?? '')
+        )
+    );
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+    }, [params.id]);
+
+    if (isLoading)
+        return (
+            &lt;Loader />
+        );
+
+    return (
+        &lt;main>
+            &lt;CustomBreadcrumb items={breadcrumbItems} />
+            &lt;FormEditEmployee employee={employee} setIsOpen={setIsOpen} setEmployeeEdited={setEmployeeEdited} />
+            &lt;Modal
+                close={() => setIsOpen(false)}
+                show={isOpen}
+                title={'Employee edited'}
+                content={`Employee ${employeeEdited} was edited!`}
+            />
+        &lt;/main>
+    );
 };</code></pre>
         </article>
     </section>

@@ -21,13 +21,12 @@ import { CreateEmployee } from '@/utils/types/Fom/CreateEmployee';
 import "./style.scss";
 
 /**
- * Functional component representing a form for creating a new employee.
+ * A custom React component that renders a form for creating a new employee.
  *
- * @component
- * @param {Object} props - The component props.
- * @param {Function} props.setIsOpen - A function to control the visibility of the form.
- * @param {Function} props.setEmployeeCreated - A function to set the created employee's name.
- * @returns {JSX.Element} FormNewEmployee component for creating a new employee.
+ * @param setIsOpen A function to set the state of the form modal.
+ * @param setEmployeeCreated A function to set the state of the created employee.
+ *
+ * @returns A React element representing the FormNewEmployee component.
  */
 export const FormNewEmployee: React.FC<CreateEmployee> = ({ setIsOpen, setEmployeeCreated }) => {
   const [states, setStates] = useState<StateOption[]>([]); 

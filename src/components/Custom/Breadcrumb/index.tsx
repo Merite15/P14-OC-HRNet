@@ -2,15 +2,18 @@ import { Link } from "react-router-dom";
 import './style.scss'
 import { BreadCrumbProps } from "@/utils/types/BreadCrumbProps";
 
+
 /**
- * Functional component representing a custom breadcrumb navigation.
+ * A custom breadcrumb component that renders a list of links, with separators between them, that indicate the current page's location within a navigational hierarchy.
  *
- * @component
- * @param {Object} props - The component props.
- * @param {Array} props.items - An array of objects representing breadcrumb items.
- * @param {ReactNode} props.children - Child elements to be included within the breadcrumb component.
- * @returns {JSX.Element} CustomBreadcrumb component for displaying breadcrumb navigation.
+ * @param items An array of breadcrumb items, each of which is an object with the following properties:
+ *   * `label`: The text to display for the breadcrumb item.
+ *   * `link`: (Optional) The URL to link to for the breadcrumb item.
+ * @param children (Optional) Any child components to render below the breadcrumb trail.
+ *
+ * @returns A React element representing the breadcrumb component.
  */
+
 export const CustomBreadcrumb: React.FC<BreadCrumbProps> = ({ items, children }) => {
     return (
         <div className="breadcrumb">

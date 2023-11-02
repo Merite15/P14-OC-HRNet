@@ -28,18 +28,15 @@ interface SelectDepartmentProps {
 }
 
 /**
- * Functional component representing a select input for choosing a department.
+ * A custom select department component that renders a select input field with options for the different departments in the company.
  *
- * @component
- * @param {Object} props - The component props.
- * @param {Function} props.register - The register function from react-hook-form for the input field.
- * @param {string} props.errors - The error message associated with the input field, if any.
- * @param {Function} props.setValue - The setValue function from react-hook-form for setting input field value.
- * @returns {JSX.Element} SelectDepartment component for choosing a department.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ * @param setValue A React Hook Form setValue function.
+ *
+ * @returns A React element representing the select department component.
  */
-
 export const SelectDepartment: React.FC<SelectDepartmentProps> = ({ register, errors, setValue }) => {
-
   return (
     <div className="input-container">
       <label htmlFor="department">Department</label>

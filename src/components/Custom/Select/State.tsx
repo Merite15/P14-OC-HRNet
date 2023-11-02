@@ -31,17 +31,16 @@ interface SelectStateProps {
 }
 
 /**
- * Functional component representing a select input for choosing a state.
+ * A custom select state component that renders a select input field with options for the different states in the United States.
  *
- * @component
- * @param {Object} props - The component props.
- * @param {Function} props.register - The register function from react-hook-form for the input field.
- * @param {string} props.errors - The error message associated with the input field, if any.
- * @param {Function} props.setValue - The setValue function from react-hook-form for setting input field value.
- * @param {Function} props.setFormSelectedState - The function to set the selected state within the component's state.
- * @param {string} props.formSelectedState - The currently selected state within the component's state.
- * @param {Array} props.states - An array of state options for the select input.
- * @returns {JSX.Element} SelectState component for choosing a state.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ * @param setValue A React Hook Form setValue function.
+ * @param setFormSelectedState A function to set the selected state.
+ * @param formSelectedState The selected state.
+ * @param states An array of state objects.
+ *
+ * @returns A React element representing the select state component.
  */
 export const SelectState: React.FC<SelectStateProps> = ({
   register,

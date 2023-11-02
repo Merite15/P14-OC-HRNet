@@ -3,9 +3,9 @@ import "./style.scss";
 import { pathNewEmployee, pathListEmployee } from "@/utils/routes";
 
 /**
- * The Home component is a React functional component that renders a welcome message and two buttons
- * for adding and viewing employees.
- * @returns The Home component is returning a JSX element.
+ * A custom React component that renders the home page of the application.
+ *
+ * @returns A React element representing the Home component.
  */
 export const Home = () => {
   return (

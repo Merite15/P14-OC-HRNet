@@ -7,16 +7,11 @@ import { State } from '@/utils/types/State';
 import "./style.scss";
 
 /**
- * Component for the employee deletion modal dialog.
+ * A custom React component that renders a modal for deleting an employee.
  *
- * @component
- * @example
- * // Using the DeleteModal component
- * <DeleteModal employeeSelected={selectedEmployee} />
+ * @param employeeSelected The ID of the employee to delete.
  *
- * @param {Object} props - The component props.
- * @param {string} props.employeeSelected - ID of the selected employee.
- * @returns {JSX.Element} Component for the employee deletion modal dialog.
+ * @returns A React element representing the DeleteModal component.
  */
 export const DeleteModal: React.FC<EmployeeSelected> = ({ employeeSelected }) => {
   const isSuccessfull = useSelector((state: State) => state.status.isSuccessfull);

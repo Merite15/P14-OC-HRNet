@@ -7,17 +7,12 @@ import { DeleteModal } from '../Modal/Delete';
 import { Link } from 'react-router-dom';
 import "./style.scss";
 
-/**
- * Functional component representing a table for displaying employee data.
- *
- * @component
- * @example
- * // Usage of the Table component
- * <Table />
- *
- * @returns {JSX.Element} Table component for displaying employee data.
- */
 
+/**
+ * A custom React component that renders a table of employees.
+ *
+ * @returns A React element representing the Table component.
+ */
 export const Table = () => {
   const [dataImport, setDataImport] = useState([]);
   const users = useSelector((state : any) => state.employees);

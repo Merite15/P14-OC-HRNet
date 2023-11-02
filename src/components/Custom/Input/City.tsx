@@ -2,14 +2,14 @@ import { Input } from './index';
 import { InputProps } from "@/utils/types/InputProps";
 
 /**
- * Functional component representing an input field for the city.
+ * A custom input city component that renders a text input field for the user to enter their city.
  *
- * @component
- * @param {Object} props - The component props.
- * @param {Function} props.register - The register function from react-hook-form for the input field.
- * @param {string} props.errors - The error message associated with the input field, if any.
- * @returns {JSX.Element} InputCity component for entering city information.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ *
+ * @returns A React element representing the input city component.
  */
+
 export const InputCity: React.FC<InputProps> = ({ register, errors }) => {
   return (
     <Input

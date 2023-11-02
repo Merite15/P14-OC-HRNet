@@ -4,14 +4,9 @@ import { pathListEmployee } from "@/utils/routes";
 import "./style.scss";
 
 /**
- * Functional component representing the header section of the application.
+ * A custom React component that renders the header of the application.
  *
- * @component
- * @example
- * // Usage of the Header component
- * <Header />
- *
- * @returns {JSX.Element} Header component containing the logo and navigation links.
+ * @returns A React element representing the Header component.
  */
 export const Header = () => {  
   return (

@@ -9,10 +9,9 @@ import { Loader } from '@/components/Utils/Loader';
 import { FormEditEmployee } from '@/components/Form/EditEmployee';
 
 /**
- * The `EditEmployee` component is a TypeScript React component that allows users to edit employee
- * information and displays a modal when an employee is successfully edited.
- * @returns The component is returning a main element that contains a CustomBreadcrumb component, a
- * FormEditEmployee component, and a Modal component.
+ * A custom React component that renders the edit employee form.
+ *
+ * @returns A React element representing the EditEmployee component.
  */
 export const EditEmployee = () => {
     const [isOpen, setIsOpen] = useState(false)

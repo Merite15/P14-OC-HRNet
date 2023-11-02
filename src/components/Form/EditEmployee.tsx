@@ -23,14 +23,13 @@ import { StateOption } from '@/utils/types/StateOption';
 import "./style.scss";
 
 /**
- * Functional component representing a form for editing employee details.
+ * A custom React component that renders a form for editing an employee's information.
  *
- * @component
- * @param {Object} props - The component props.
- * @param {Object} props.employee - The employee object to be edited.
- * @param {Function} props.setIsOpen - A function to control the visibility of the form.
- * @param {Function} props.setEmployeeEdited - A function to set the edited employee's name.
- * @returns {JSX.Element} FormEditEmployee component for editing employee details.
+ * @param employee The employee to edit.
+ * @param setIsOpen A function to set the state of the form modal.
+ * @param setEmployeeEdited A function to set the state of the edited employee.
+ *
+ * @returns A React element representing the FormEditEmployee component.
  */
 export const FormEditEmployee: React.FC<EditEmployee> = ({ employee, setIsOpen, setEmployeeEdited }) => {
     const dispatch = useDispatch();

@@ -2,13 +2,12 @@ import { Input } from './index';
 import { InputProps } from "@/utils/types/InputProps";
 
 /**
- * Functional component representing an input field for the date of birth.
+ * A custom input birthday component that renders a date input field for the user to enter their date of birth.
  *
- * @component
- * @param {Object} props - The component props.
- * @param {Function} props.register - The register function from react-hook-form for the input field.
- * @param {string} props.errors - The error message associated with the input field, if any.
- * @returns {JSX.Element} InputBirthDay component for entering date of birth information.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ *
+ * @returns A React element representing the input birthday component.
  */
 export const InputBirthDay: React.FC<InputProps> = ({ register, errors }) => {
   return (

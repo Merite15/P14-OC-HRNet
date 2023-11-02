@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 import "./style.scss";
 
 /**
- * The NotFound function returns a JSX element representing a 404 error page with a message and a link
- * to the home page.
- * @returns A JSX element is being returned.
+ * A custom React component that renders a 404 page.
+ *
+ * @returns A React element representing the NotFound component.
  */
 export const NotFound = (): JSX.Element => {
     return (

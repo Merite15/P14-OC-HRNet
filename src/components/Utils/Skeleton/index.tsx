@@ -1,15 +1,11 @@
 import "./style.scss";
 
 /**
- * Functional component representing a skeleton or placeholder element.
+ * A custom React component that renders a skeleton.
  *
- * @component
- * @example
- * // Usage of the Skeleton component
- * <Skeleton />
- *
- * @returns {JSX.Element} Skeleton component representing a placeholder element.
+ * @returns A React element representing the Skeleton component.
  */
+
 export const Skeleton = () => {
     return (
         <section className="box">

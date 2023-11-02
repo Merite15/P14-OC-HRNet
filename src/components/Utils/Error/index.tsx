@@ -1,14 +1,9 @@
 import "./style.scss";
 
 /**
- * Functional component representing an error message displayed when attempting to modify a non-existent employee.
+ * A custom React component that displays an error if the employee the user is trying to edit does not exist.
  *
- * @component
- * @example
- * // Usage of the Error component
- * <Error />
- *
- * @returns {JSX.Element} Error component displaying a message for non-existent employee modification.
+ * @returns A React element representing the Error component.
  */
 export const Error = () => {
     return (

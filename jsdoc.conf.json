@@ -1,12 +1,18 @@
 {
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
   "source": {
     "include": ["./src", "./README.md"],
-    "includePattern": ".+\\.tsx$"
+    "includePattern": "\\.(jsx|js|ts|tsx)$",
+    "excludePattern": "(^|\\/|\\\\)_"
   },
   "opts": {
     "destination": "./docs",
     "recurse": true,
     "verbose": true,
+    "readme": "README.md",
     "encoding": "utf8"
   },
   "plugins": ["plugins/markdown"],

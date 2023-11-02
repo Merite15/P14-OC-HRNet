@@ -2,13 +2,12 @@ import { Input } from './index';
 import { InputProps } from "@/utils/types/InputProps";
 
 /**
- * Functional component representing an input field for the zip code.
+ * A custom input zip code component that renders a number input field for the user to enter their zip code.
  *
- * @component
- * @param {Object} props - The component props.
- * @param {Function} props.register - The register function from react-hook-form for the input field.
- * @param {string} props.errors - The error message associated with the input field, if any.
- * @returns {JSX.Element} InputZipCode component for entering zip code information.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ *
+ * @returns A React element representing the input zip code component.
  */
 export const InputZipCode: React.FC<InputProps> = ({ register, errors }) => {
   return (

@@ -4,12 +4,11 @@ import { CustomBreadcrumb } from '@/components/Custom/Breadcrumb';
 import { FormNewEmployee } from '@/components/Form/NewEmployee';
 
 /**
- * The NewEmployee component renders a form to create a new employee and displays a modal with a
- * success message when the employee is created.
- * @returns The code is returning a JSX element that represents the main content of the page. It
- * includes a custom breadcrumb component, a form for creating a new employee, and a modal component
- * for displaying a success message when an employee is created.
+ * A custom React component that renders the new employee form.
+ *
+ * @returns A React element representing the NewEmployee component.
  */
+
 export const NewEmployee = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [employeeCreated, setEmployeeCreated] = useState('');

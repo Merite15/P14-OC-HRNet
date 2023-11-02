@@ -2,10 +2,9 @@ import { useState } from 'react';
 import "./style.scss";
 
 /**
- * Functional component representing a custom tooltip for providing input validation rules.
+ * A custom tooltip component that renders a tooltip with information about the input field that it is associated with.
  *
- * @component
- * @returns {JSX.Element} CustomTooltip component for displaying input validation rules on hover.
+ * @returns A React element representing the custom tooltip component.
  */
 export const CustomTooltip = () => {
   const [isHovering, setIsHovering] = useState(false);

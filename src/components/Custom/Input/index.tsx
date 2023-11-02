@@ -16,23 +16,22 @@ interface InputProps {
 }
 
 /**
- * Functional component representing an input field.
+ * A custom input component that renders a text input field with a label and validation errors.
  *
- * @component
- * @param {Object} props - The component props.
- * @param {string} props.name - The name attribute for the input field.
- * @param {string} props.type - The type of input (e.g., text, date, etc.).
- * @param {string} props.id - The id attribute for the input field.
- * @param {string} props.label - The label attribute for the input field.
- * @param {string} props.labelText - The text displayed as the label for the input field.
- * @param {boolean} props.isModal - A flag indicating whether the input field is used in a modal.
- * @param {boolean} props.isAutoComplete - A flag indicating whether auto-completion is enabled for the input field.
- * @param {string} props.placeholder - The placeholder text for the input field.
- * @param {Function} props.register - The register function from react-hook-form for the input field.
- * @param {string} props.errors - The error message associated with the input field, if any.
- * @param {string} props.min - The minimum value allowed for the input field.
- * @param {string} props.max - The maximum value allowed for the input field.
- * @returns {JSX.Element} Input component for various input fields.
+ * @param name The name of the input field.
+ * @param type The type of the input field.
+ * @param id The id of the input field.
+ * @param label The label for the input field.
+ * @param labelText The text for the label of the input field.
+ * @param isModal (Optional) Whether or not the input field is modal.
+ * @param isAutoComplete (Optional) Whether or not the input field should be autocompleted.
+ * @param placeholder (Optional) The placeholder text for the input field.
+ * @param register A React Hook Form register function.
+ * @param errors A React Hook Form errors object.
+ * @param min (Optional) The minimum value for the input field.
+ * @param max (Optional) The maximum value for the input field.
+ *
+ * @returns A React element representing the input component.
  */
 
 export const Input: React.FC<InputProps> = ({

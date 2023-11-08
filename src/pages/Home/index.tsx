@@ -16,14 +16,14 @@ export const Home = () => {
           <span> Your portal to manage employees list</span>
           <span></span>
         </h2>
-        <ul className="btn-actions">
+        <div className="btn-actions">
           <NavLink to={pathNewEmployee}>
-            <li className="btn">Add employee</li>
+            <p className="btn">Add employee</p>
           </NavLink>
           <NavLink to={pathListEmployee}>
-            <li className="btn">View employees</li>
+            <p className="btn">View employees</p>
           </NavLink>
-        </ul>
+        </div>
       </div>
     </main>
   );

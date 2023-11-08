@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { States } from '@/utils/States';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { convertLocalDateInUTC, dateParser } from '@/utils/DateFunctions';
+import { dateParser } from '@/utils/DateFunctions';
 import { useDispatch } from 'react-redux';
 import { addUser } from '@/store/users';
 import { InputFirstName } from '../Custom/Input/FirstName';
@@ -35,21 +35,15 @@ export const FormNewEmployee: React.FC<CreateEmployee> = ({ setIsOpen, setEmploy
 
   const form = useForm({
     defaultValues: {
-      first_name: 'Eric',
-      last_name: 'Beaumont',
-      dateOfBirth: `${new Date(convertLocalDateInUTC(new Date(1987, 2, 18)))
-        .toISOString()
-        .slice(0, 10)
-        }`,
-      startDate: `${new Date(convertLocalDateInUTC(new Date(2007, 1, 30)))
-        .toISOString()
-        .slice(0, 10)
-        }`,
-      department: 'Legal',
-      address: '26 Park',
-      city: 'Alabama',
-      state: 'NY',
-      zipCode: 501,
+      first_name: '',
+      last_name: '',
+      dateOfBirth: undefined,
+      startDate: undefined,
+      department: '',
+      address: '',
+      city: '',
+      state: '',
+      zipCode: undefined
     },
 
     mode: 'all',

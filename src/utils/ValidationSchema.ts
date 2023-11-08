@@ -24,6 +24,6 @@ export const ValidationSchema = z.object({
         .min(3, { message: 'Minimum 3 characters' })
         .max(30, { message: 'Maximum 30 characters' }),
     state: z.string().nonempty('State name is required.'),
-    zipCode: z.string().nonempty('Zipcode is required.').min(2).max(40),
+    zipCode: z.number().min(500).max(1000),
     department: z.string().nonempty('Department is required.'),
 });

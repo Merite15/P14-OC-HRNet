@@ -5,6 +5,7 @@ export const users = createSlice({
     name: 'employees',
     initialState: [] as Employee[],
     reducers: {
+        // @ts-ignore
         getUsers: (state, action) => {
             return state = action.payload;
         },

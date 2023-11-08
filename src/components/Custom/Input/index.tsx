@@ -1,12 +1,9 @@
-import { CustomTooltip } from '../../Custom/Tooltip';
-
 interface InputProps {
   name: string;
   type: string;
   id: string;
   label: string;
   labelText: string;
-  isModal: boolean;
   isAutoComplete: boolean;
   placeholder?: string;
   register: Function;
@@ -23,7 +20,6 @@ interface InputProps {
  * @param id The id of the input field.
  * @param label The label for the input field.
  * @param labelText The text for the label of the input field.
- * @param isModal (Optional) Whether or not the input field is modal.
  * @param isAutoComplete (Optional) Whether or not the input field should be autocompleted.
  * @param placeholder (Optional) The placeholder text for the input field.
  * @param register A React Hook Form register function.
@@ -40,7 +36,6 @@ export const Input: React.FC<InputProps> = ({
   id,
   label,
   labelText,
-  isModal,
   isAutoComplete,
   placeholder,
   register,
@@ -52,7 +47,6 @@ export const Input: React.FC<InputProps> = ({
     <div className="input-container relative">
       <label htmlFor={label}>
         {labelText}
-        {isModal && <CustomTooltip />}
       </label>
       <input
         type={type}

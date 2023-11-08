@@ -18,7 +18,6 @@ export const InputCity: React.FC<InputProps> = ({ register, errors }) => {
       id={'city'}
       label={'city'}
       labelText={'City'}
-      isModal={false}
       isAutoComplete={false}
       placeholder={'ex: New York'}
       register={register}

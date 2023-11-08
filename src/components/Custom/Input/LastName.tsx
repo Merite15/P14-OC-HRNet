@@ -17,7 +17,6 @@ export const InputLastName: React.FC<InputProps> = ({register, errors}) => {
         id={'lastName'}
         label={'lastName'}
         labelText={'Last name'}
-        isModal={true}
         isAutoComplete={false}
         placeholder={'ex: DeLaVoie'}
         register={register}

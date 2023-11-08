@@ -17,7 +17,6 @@ export const InputBirthDay: React.FC<InputProps> = ({ register, errors }) => {
         id={'dateOfBirth'}
         label={'dateOfBirth'}
         labelText={'Date of birth'}
-        isModal={false}
         isAutoComplete={false}
         register={register}
         errors={errors}

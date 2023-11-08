@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { States } from '@/utils/States';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { dateParser } from '@/utils/DateFunctions';
 import { useDispatch } from 'react-redux';
 import { addUser } from '@/store/users';
@@ -14,10 +13,10 @@ import { InputCity } from '../Custom/Input/City';
 import { InputZipCode } from '../Custom/Input/ZipCode';
 import { SelectDepartment } from '../Custom/Select/Department';
 import { SelectState } from '../Custom/Select/State';
-import { validationSchema } from '../../utils/ValidationSchema';
 import { StateOption } from '@/utils/types/StateOption';
 import { CreateEmployee } from '@/utils/types/Fom/CreateEmployee';
-
+import { ValidationSchema } from '@/utils/ValidationSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 import "./style.scss";
 
 /**
@@ -29,7 +28,7 @@ import "./style.scss";
  * @returns A React element representing the FormNewEmployee component.
  */
 export const FormNewEmployee: React.FC<CreateEmployee> = ({ setIsOpen, setEmployeeCreated }) => {
-  const [states, setStates] = useState<StateOption[]>([]); 
+  const [states, setStates] = useState<StateOption[]>([]);
   const dispatch = useDispatch();
   const [formSelectedState, setFormSelectedState] = useState<string | undefined>();
 
@@ -37,17 +36,15 @@ export const FormNewEmployee: React.FC<CreateEmployee> = ({ setIsOpen, setEmploy
     defaultValues: {
       first_name: '',
       last_name: '',
-      dateOfBirth: undefined,
-      startDate: undefined,
+      dateOfBirth: '',
+      startDate: '',
       department: '',
       address: '',
       city: '',
       state: '',
-      zipCode: undefined
+      zipCode: 501
     },
-
-    mode: 'all',
-    resolver: yupResolver(validationSchema),
+    resolver: zodResolver(ValidationSchema),
   });
 
   const { register, setValue, handleSubmit, formState, reset } = form;

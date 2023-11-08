@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { States } from '@/utils/States';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { convertLocalDateInUTC, dateParser } from '@/utils/DateFunctions';
 import { useDispatch } from 'react-redux';
 import { editUser } from '@/store/users';
@@ -16,9 +15,10 @@ import { InputZipCode } from '../Custom/Input/ZipCode';
 import { SelectDepartment } from '../Custom/Select/Department';
 import { Error } from '../Utils/Error';
 import { SelectState } from '../Custom/Select/State';
-import { validationSchema } from '../../utils/ValidationSchema';
 import { EditEmployee } from '@/utils/types/Fom/EditEmployee';
 import { StateOption } from '@/utils/types/StateOption';
+import { ValidationSchema } from '@/utils/ValidationSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import "./style.scss";
 
@@ -53,7 +53,7 @@ export const FormEditEmployee: React.FC<EditEmployee> = ({ employee, setIsOpen, 
         state,
         zipCode
     } = employee;
-    
+
     const form = useForm({
         defaultValues: {
             first_name: first_name || '',
@@ -66,8 +66,7 @@ export const FormEditEmployee: React.FC<EditEmployee> = ({ employee, setIsOpen, 
             state: state || '',
             zipCode: zipCode,
         },
-        mode: 'all',
-        resolver: yupResolver(validationSchema),
+        resolver: zodResolver(ValidationSchema),
     });
 
     const { register, setValue, handleSubmit, formState, reset } = form;

@@ -17,7 +17,6 @@ export const InputZipCode: React.FC<InputProps> = ({ register, errors }) => {
         id={'zipCode'}
         label={'zipCode'}
         labelText={'Zip Code'}
-        isModal={false}
         isAutoComplete={false}
         min={501}
         max={99950}

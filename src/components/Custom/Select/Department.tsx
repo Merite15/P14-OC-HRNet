@@ -5,8 +5,8 @@ interface SelectDepartmentProps {
   register: UseFormRegister<{
     first_name: string,
     last_name: string;
-    dateOfBirth: Date;
-    startDate: Date;
+    dateOfBirth:  string;
+    startDate:  string;
     department: string;
     address: string;
     city: string;
@@ -17,8 +17,8 @@ interface SelectDepartmentProps {
   setValue: UseFormSetValue<{
     first_name: string,
     last_name: string;
-    dateOfBirth: Date;
-    startDate: Date;
+    dateOfBirth:  string;
+    startDate:  string;
     department: string;
     address: string;
     city: string;

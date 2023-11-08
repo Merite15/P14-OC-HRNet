@@ -36,6 +36,8 @@ export const DeleteModal: React.FC<EmployeeSelected> = ({ employeeSelected }) =>
           </p>
           <div className="modal-btn">
             <button
+              id="cancel" aria-label="Cancel"
+              role='button'
               className="btn-cancel"
               onClick={() => {
                 dispatch(setIsDeleted(false));
@@ -44,6 +46,8 @@ export const DeleteModal: React.FC<EmployeeSelected> = ({ employeeSelected }) =>
               Cancel
             </button>
             <button
+            id="success" aria-label="success"
+            role='button'
               className="btn-success"
               onClick={() => {
                 dispatch(setIsSelected(false));

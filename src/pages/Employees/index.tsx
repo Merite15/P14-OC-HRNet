@@ -19,9 +19,9 @@ export const EmployeeList = () => {
         <main className='list-page-main'>
             <CustomBreadcrumb items={breadcrumbItems} >
                 <NavLink to="/employees/new">
-                    <li className="add-btn">
+                    <span className="add-btn">
                         <i className="fa-solid fa-plus"></i>
-                        <span className='add-text'>Add employee</span></li>
+                        <span className='add-text'>Add employee</span></span>
                 </NavLink>
             </CustomBreadcrumb>
             <Table />

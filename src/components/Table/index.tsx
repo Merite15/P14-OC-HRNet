@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useGlobalFilter, useTable, usePagination, useSortBy } from 'react-table';
 import { dateParser } from '@/utils/DateFunctions';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsSelected, setIsDeleted} from '@/store/formStatus';
+import { setIsSelected, setIsDeleted } from '@/store/formStatus';
 import { DeleteModal } from '../Modal/Delete';
 import { Link } from 'react-router-dom';
 import "./style.scss";
@@ -15,7 +15,7 @@ import "./style.scss";
  */
 export const Table = () => {
   const [dataImport, setDataImport] = useState([]);
-  const users = useSelector((state : any) => state.employees);
+  const users = useSelector((state: any) => state.employees);
   const dispatch = useDispatch();
   const [employeeSelected, setEmployedSelected] = useState<string>('');
 
@@ -27,7 +27,7 @@ export const Table = () => {
 
   const CustomCell = useCallback(
     ({ row }: { row: any }) => {
-      const handleCellClick = (e : any) => {
+      const handleCellClick = (e: any) => {
         const employeeId = e.target.dataset.id;
 
         dispatch(setIsSelected(true));
@@ -41,7 +41,7 @@ export const Table = () => {
 
       return (
         <div className="custom-cell-icons">
-          <Link to={`/employees/edit/${row.original.id}`}>
+          <Link title='Edit User' aria-label="View for editing user" to={`/employees/edit/${row.original.id}`}>
             <i className="fa-solid fa-pen-to-square edit-icon" data-id={row.original.id}></i>
           </Link>
           <i className="fa-solid fa-trash-can delete-icon" data-id={row.original.id} onClick={handleCellClick}></i>
@@ -58,9 +58,9 @@ export const Table = () => {
       {
         Header: 'Date of Birth',
         accessor: 'dateOfBirth',
-        Cell: ({ value } : { value: string }) => dateParser(value),
+        Cell: ({ value }: { value: string }) => dateParser(value),
         disableFilters: true,
-        sortType: (a : any, b : any) => {
+        sortType: (a: any, b: any) => {
           return (
             new Date(b.values.dateOfBirth).valueOf() - new Date(a.values.dateOfBirth).valueOf()
           );
@@ -69,9 +69,9 @@ export const Table = () => {
       {
         Header: 'Start Date',
         accessor: 'startDate',
-        Cell: ({ value } : { value: string }) => dateParser(value),
+        Cell: ({ value }: { value: string }) => dateParser(value),
         disableFilters: true,
-        sortType: (a : any, b : any) => {
+        sortType: (a: any, b: any) => {
           return new Date(b.values.startDate).valueOf() - new Date(a.values.startDate).valueOf();
         },
       },
@@ -120,10 +120,12 @@ export const Table = () => {
       <div className="list-container">
         <div className="list-header">
           <div className="filter-entries-container">
-            <span>show: </span>
+            <label htmlFor="state">Show:</label>
             <select
+              id='state'
+              aria-label="State"
               value={pageSize}
-              onChange={(e : any) => setPageSize(e.target.value)}
+              onChange={(e: any) => setPageSize(e.target.value)}
             >
               <option value={10}>10</option>
               <option value={25}>25</option>
@@ -168,11 +170,11 @@ export const Table = () => {
             </thead>
             {page.length > 0 && (
               <tbody {...getTableBodyProps()}>
-                {page.map((row : any, index : any) => {
+                {page.map((row: any, index: any) => {
                   prepareRow(row);
                   return (
                     <tr {...row.getRowProps()} key={index}>
-                      {row.cells.map((cell : any, index : any) => (
+                      {row.cells.map((cell: any, index: any) => (
                         <td {...cell.getCellProps()} key={index}>
                           {cell.render('Cell')}
                         </td>
@@ -200,7 +202,7 @@ export const Table = () => {
               >
                 Previous
               </button>
-              {pageOptions.map((p : any, index: any) => {
+              {pageOptions.map((p: any, index: any) => {
                 if (
                   (pageIndex > p - 2 && pageIndex < p + 2) ||
                   (p < 3 && pageIndex < 2) ||

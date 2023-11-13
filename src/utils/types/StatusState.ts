@@ -1,5 +1,5 @@
 export interface StatusState {
-    isSuccessfull: boolean;
+    isSuccessful: boolean;
     isDeleted: boolean;
     isSelected: boolean;
 }

@@ -5,6 +5,7 @@ import { deleteUser } from '@/store/users';
 import { EmployeeSelected } from '@/utils/types/EmployeeSelected';
 import { State } from '@/utils/types/State';
 import "./style.scss";
+import { useMemo } from 'react';
 
 /**
  * A custom React component that renders a modal for deleting an employee.
@@ -14,25 +15,25 @@ import "./style.scss";
  * @returns A React element representing the DeleteModal component.
  */
 export const DeleteModal: React.FC<EmployeeSelected> = ({ employeeSelected }) => {
-  const isSuccessfull = useSelector((state: State) => state.status.isSuccessfull);
+  const isSuccessful = useSelector((state: State) => state.status.isSuccessful);
   const isDeleted = useSelector((state: State) => state.status.isDeleted);
   const isSelected = useSelector((state: State) => state.status.isSelected);
   const dispatch = useDispatch();
 
-  const employee = useSelector((state: State) =>
-    state.employees.filter(
-      (employee) => employee.id === parseInt(employeeSelected)
-    )
+  const employees = useSelector((state: State) => state.employees);
+  const filteredEmployee = useMemo(
+    () => employees.filter((emp) => emp.id === parseInt(employeeSelected)),
+    [employees, employeeSelected]
   );
 
   const ContentDeleteModal = () => {
-    if (employee[0])
+    if (filteredEmployee[0])
       return (
         <>
           <p className='trash-text'>
             <i className="fa-solid fa-exclamation"></i>
             <span>Est vous sur que vous voulez supprimer l'employé</span>
-            <span>{`${employee[0].first_name} ${employee[0].last_name}`}</span>
+            <span>{`${filteredEmployee[0].first_name} ${filteredEmployee[0].last_name}`}</span>
           </p>
           <div className="modal-btn">
             <button
@@ -46,12 +47,12 @@ export const DeleteModal: React.FC<EmployeeSelected> = ({ employeeSelected }) =>
               Cancel
             </button>
             <button
-            id="success" aria-label="success"
-            role='button'
+              id="success" aria-label="success"
+              role='button'
               className="btn-success"
               onClick={() => {
                 dispatch(setIsSelected(false));
-                dispatch(deleteUser(employee[0].id));
+                dispatch(deleteUser(filteredEmployee[0].id));
                 dispatch(setIsSuccessful(true));
               }}
             >
@@ -62,7 +63,7 @@ export const DeleteModal: React.FC<EmployeeSelected> = ({ employeeSelected }) =>
       );
   };
 
-  if (isSelected && !isSuccessfull)
+  if (isSelected && !isSuccessful)
     return (
       <>
         <Modal
@@ -85,10 +86,9 @@ export const DeleteModal: React.FC<EmployeeSelected> = ({ employeeSelected }) =>
             dispatch(setIsSuccessful(false));
             dispatch(setIsSelected(false));
           }}
-          show={isSuccessfull}
+          show={isSuccessful}
           title={'Suppression effectuée'}
           content={`Employee was deleted!`}
-
         />
       </>
     );

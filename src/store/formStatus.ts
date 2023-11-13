@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState: StatusState = {
   isSelected: false,
   isDeleted: false,
-  isSuccessfull: false,
+  isSuccessful: false,
 };
 
 export const formStatus = createSlice({
@@ -18,7 +18,7 @@ export const formStatus = createSlice({
       return (state = { ...state, isDeleted: action.payload });
     },
     setIsSuccessful: (state, action) => {
-      return (state = { ...state, isSuccessfull: action.payload });
+      return (state = { ...state, isSuccessful: action.payload });
     },
   },
 });
